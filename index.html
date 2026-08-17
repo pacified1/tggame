@@ -1,0 +1,3495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lunara — Play Together ✦</title>
+
+<style>
+:root {
+  --bg: #090812;
+  --panel: rgba(20, 18, 32, .92);
+  --panel2: #171426;
+  --panel3: #211b34;
+
+  --text: #f8f4ff;
+  --muted: #9d95ad;
+
+  --purple: #a78bfa;
+  --purple2: #7957d5;
+  --pink: #ff7ac8;
+  --blue: #7dd3fc;
+  --green: #86efac;
+  --red: #fb7185;
+  --yellow: #fde68a;
+
+  --border: rgba(255,255,255,.08);
+  --shadow: rgba(0,0,0,.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(167,139,250,.13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(255,122,200,.10),
+      transparent 32%
+    ),
+    var(--bg);
+}
+
+/* ------------------------------
+   JOIN SCREEN
+------------------------------ */
+
+.join-screen {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.join-card {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 34px;
+
+  text-align: center;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 30px;
+
+  box-shadow:
+    0 30px 90px var(--shadow);
+
+  backdrop-filter: blur(20px);
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 18px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 24px;
+
+  font-size: 36px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple2),
+      var(--pink)
+    );
+
+  box-shadow:
+    0 0 40px rgba(167,139,250,.22);
+}
+
+.join-card h1 {
+  margin: 0;
+
+  font-size: 29px;
+  letter-spacing: -1px;
+}
+
+.join-card p {
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  margin: 10px 0 25px;
+}
+
+.input {
+  width: 100%;
+
+  padding: 15px 17px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 16px;
+
+  outline: none;
+
+  color: var(--text);
+  background: #11101a;
+
+  font: inherit;
+}
+
+.input:focus {
+  border-color:
+    rgba(167,139,250,.6);
+}
+
+.primary {
+  width: 100%;
+
+  margin-top: 11px;
+
+  padding: 14px 18px;
+
+  border: 0;
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  color: white;
+
+  font-weight: 750;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple2),
+      var(--pink)
+    );
+
+  transition: .2s;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+}
+
+.room-row {
+  display: flex;
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.room-row .input {
+  min-width: 0;
+}
+
+.secondary {
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  padding: 0 15px;
+
+  background: var(--panel2);
+  color: var(--text);
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.small-note {
+  margin-top: 18px;
+
+  color: #6f687c;
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------
+   APP
+------------------------------ */
+
+.app {
+  width: 100%;
+  height: 100vh;
+
+  display: grid;
+
+  grid-template-columns:
+    250px
+    minmax(0, 1fr)
+    285px;
+
+  overflow: hidden;
+}
+
+
+/* ------------------------------
+   SIDEBAR
+------------------------------ */
+
+.sidebar {
+  padding: 22px;
+
+  border-right:
+    1px solid var(--border);
+
+  background:
+    rgba(13,11,21,.72);
+}
+
+.brand {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple2),
+      var(--pink)
+    );
+}
+
+.brand-title {
+  font-weight: 800;
+}
+
+.brand-subtitle {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.section-title {
+  color: #756e82;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  margin: 22px 0 9px;
+}
+
+.game-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px;
+
+  margin-bottom: 6px;
+
+  border: 1px solid transparent;
+  border-radius: 14px;
+
+  background: transparent;
+  color: var(--muted);
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition: .18s;
+}
+
+.game-button:hover {
+  background: var(--panel2);
+  color: var(--text);
+}
+
+.game-button.active {
+  color: var(--text);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(121,87,213,.25),
+      rgba(255,122,200,.08)
+    );
+
+  border-color:
+    rgba(167,139,250,.15);
+}
+
+.game-icon {
+  font-size: 21px;
+}
+
+.game-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.game-description {
+  margin-top: 2px;
+
+  font-size: 9px;
+  color: #716a7d;
+}
+
+.room-box {
+  margin-top: 28px;
+
+  padding: 13px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.025);
+}
+
+.room-label {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.room-code {
+  margin-top: 5px;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+
+  color: var(--purple);
+}
+
+.copy-room {
+  width: 100%;
+
+  margin-top: 9px;
+
+  padding: 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  color: var(--muted);
+  background: var(--panel2);
+
+  cursor: pointer;
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------
+   GAME AREA
+------------------------------ */
+
+.game-area {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(167,139,250,.045),
+      transparent 40%
+    );
+}
+
+.topbar {
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 22px;
+
+  border-bottom:
+    1px solid var(--border);
+}
+
+.game-title {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.game-subtitle {
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.players {
+  display: flex;
+  gap: 7px;
+}
+
+.player-pill {
+  padding: 7px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.025);
+
+  font-size: 10px;
+}
+
+.player-pill.online {
+  color: var(--green);
+}
+
+.game-content {
+  flex: 1;
+
+  overflow-y: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+}
+
+.game-card {
+  width: min(520px, 100%);
+
+  text-align: center;
+}
+
+.game-status {
+  min-height: 25px;
+
+  margin-bottom: 17px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.reset {
+  padding: 10px 15px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: var(--panel2);
+  color: var(--text);
+
+  cursor: pointer;
+
+  font-size: 11px;
+}
+
+
+/* ------------------------------
+   TIC TAC TOE
+------------------------------ */
+
+.ttt-board {
+  width: min(330px, 90vw);
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+.ttt-cell {
+  aspect-ratio: 1;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+  background: var(--panel2);
+
+  color: var(--text);
+
+  font-size: clamp(35px, 8vw, 55px);
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .15s;
+}
+
+.ttt-cell:hover {
+  background: var(--panel3);
+}
+
+.ttt-cell.x {
+  color: var(--pink);
+}
+
+.ttt-cell.o {
+  color: var(--blue);
+}
+
+
+/* ------------------------------
+   RPS
+------------------------------ */
+
+.rps-options {
+  display: flex;
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.rps-button {
+  width: 105px;
+  height: 105px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 23px;
+
+  background: var(--panel2);
+
+  cursor: pointer;
+
+  font-size: 37px;
+
+  transition: .2s;
+}
+
+.rps-button:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(167,139,250,.4);
+
+  background: var(--panel3);
+}
+
+.rps-label {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------
+   CONNECT FOUR
+------------------------------ */
+
+.c4-board {
+  width: min(390px, 95vw);
+
+  padding: 9px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 6px;
+
+  background:
+    #292153;
+
+  border-radius: 18px;
+}
+
+.c4-cell {
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #0f0d18;
+
+  cursor: pointer;
+}
+
+.c4-piece {
+  width: 82%;
+  height: 82%;
+
+  border-radius: 50%;
+}
+
+.c4-red {
+  background: var(--pink);
+
+  box-shadow:
+    0 0 12px rgba(255,122,200,.25);
+}
+
+.c4-yellow {
+  background: var(--yellow);
+
+  box-shadow:
+    0 0 12px rgba(253,230,138,.25);
+}
+
+
+/* ------------------------------
+   QUICK DUEL
+------------------------------ */
+
+.duel-box {
+  padding: 25px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 24px;
+
+  background: var(--panel2);
+}
+
+.duel-timer {
+  margin-bottom: 15px;
+
+  font-size: 55px;
+  font-weight: 900;
+
+  color: var(--purple);
+}
+
+.duel-button {
+  padding: 15px 25px;
+
+  border: 0;
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple2),
+      var(--pink)
+    );
+
+  color: white;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* ------------------------------
+   CHAT
+------------------------------ */
+
+.chat {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  border-left:
+    1px solid var(--border);
+
+  background:
+    rgba(13,11,21,.72);
+}
+
+.chat-header {
+  padding: 20px;
+
+  border-bottom:
+    1px solid var(--border);
+}
+
+.chat-header-title {
+  font-weight: 800;
+}
+
+.chat-header-sub {
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.chat-messages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 16px;
+}
+
+.chat-empty {
+  padding-top: 40px;
+
+  text-align: center;
+
+  color: #6f687c;
+
+  font-size: 11px;
+}
+
+.chat-message {
+  margin-bottom: 13px;
+}
+
+.chat-name {
+  margin-bottom: 4px;
+
+  color: var(--purple);
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.chat-text {
+  display: inline-block;
+
+  max-width: 95%;
+
+  padding: 9px 11px;
+
+  border-radius: 13px;
+
+  background: var(--panel2);
+
+  color: var(--text);
+
+  font-size: 11px;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chat-message.mine .chat-name {
+  color: var(--pink);
+}
+
+.chat-message.mine {
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  gap: 6px;
+
+  padding: 11px;
+
+  border-top:
+    1px solid var(--border);
+}
+
+.chat-input input {
+  min-width: 0;
+  flex: 1;
+
+  padding: 10px 11px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #11101a;
+  color: var(--text);
+}
+
+.chat-input button {
+  padding: 0 12px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: var(--purple2);
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* ------------------------------
+   MOBILE
+------------------------------ */
+
+@media (max-width: 900px) {
+
+  .app {
+    grid-template-columns:
+      185px
+      minmax(0, 1fr)
+      230px;
+  }
+
+  .sidebar {
+    padding: 15px;
+  }
+
+  .game-description {
+    display: none;
+  }
+
+}
+
+@media (max-width: 720px) {
+
+  body {
+    overflow: auto;
+  }
+
+  .app {
+    height: 100vh;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .sidebar {
+    display: flex;
+    align-items: center;
+
+    overflow-x: auto;
+
+    padding: 8px;
+
+    border-right: 0;
+    border-bottom:
+      1px solid var(--border);
+  }
+
+  .brand,
+  .section-title,
+  .room-box {
+    display: none;
+  }
+
+  .game-button {
+    width: auto;
+
+    min-width: 72px;
+
+    margin: 0 3px;
+
+    justify-content: center;
+
+    padding: 8px;
+  }
+
+  .game-name {
+    display: none;
+  }
+
+  .game-icon {
+    font-size: 21px;
+  }
+
+  .chat {
+    max-height: 210px;
+
+    border-left: 0;
+
+    border-top:
+      1px solid var(--border);
+  }
+
+  .chat-header {
+    padding: 10px 15px;
+  }
+
+  .chat-messages {
+    min-height: 80px;
+  }
+
+  .game-content {
+    padding: 18px;
+  }
+
+  .topbar {
+    min-height: 60px;
+
+    padding: 10px 15px;
+  }
+
+  .players {
+    max-width: 150px;
+
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 430px) {
+
+  .rps-button {
+    width: 88px;
+    height: 88px;
+  }
+
+  .game-title {
+    font-size: 14px;
+  }
+
+  .game-subtitle {
+    font-size: 9px;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     JOIN
+========================================= -->
+
+<section class="join-screen" id="joinScreen">
+
+  <div class="join-card">
+
+    <div class="logo">
+      🌙
+    </div>
+
+    <h1>Lunara</h1>
+
+    <p>
+      A tiny multiplayer playground ✦
+      <br>
+      Pick a name, invite someone,
+      and play together.
+    </p>
+
+    <input
+      class="input"
+      id="nameInput"
+      maxlength="20"
+      placeholder="your name ✨"
+      autocomplete="off"
+    >
+
+    <button
+      class="primary"
+      id="createButton"
+    >
+      Create a room
+    </button>
+
+    <div class="room-row">
+
+      <input
+        class="input"
+        id="roomInput"
+        maxlength="12"
+        placeholder="room code"
+        autocomplete="off"
+      >
+
+      <button
+        class="secondary"
+        id="joinButton"
+      >
+        Join
+      </button>
+
+    </div>
+
+    <div class="small-note">
+      Nothing is saved. The room only exists while
+      people are connected.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     APP
+========================================= -->
+
+<div
+  class="app"
+  id="app"
+  style="display:none"
+>
+
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        🌙
+      </div>
+
+      <div>
+
+        <div class="brand-title">
+          Lunara
+        </div>
+
+        <div class="brand-subtitle">
+          play together ✦
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-title">
+      Games
+    </div>
+
+
+    <button
+      class="game-button active"
+      data-game="ttt"
+    >
+      <span class="game-icon">⭕</span>
+
+      <span>
+        <div class="game-name">
+          Tic-Tac-Toe
+        </div>
+
+        <div class="game-description">
+          classic 3 × 3
+        </div>
+      </span>
+    </button>
+
+
+    <button
+      class="game-button"
+      data-game="rps"
+    >
+      <span class="game-icon">✊</span>
+
+      <span>
+        <div class="game-name">
+          Rock Paper Scissors
+        </div>
+
+        <div class="game-description">
+          best of one
+        </div>
+      </span>
+    </button>
+
+
+    <button
+      class="game-button"
+      data-game="c4"
+    >
+      <span class="game-icon">🔴</span>
+
+      <span>
+        <div class="game-name">
+          Connect Four
+        </div>
+
+        <div class="game-description">
+          four in a row
+        </div>
+      </span>
+    </button>
+
+
+    <button
+      class="game-button"
+      data-game="duel"
+    >
+      <span class="game-icon">⚡</span>
+
+      <span>
+        <div class="game-name">
+          Quick Duel
+        </div>
+
+        <div class="game-description">
+          fastest wins
+        </div>
+      </span>
+    </button>
+
+
+    <div class="room-box">
+
+      <div class="room-label">
+        Room
+      </div>
+
+      <div
+        class="room-code"
+        id="roomCode"
+      >
+        ------
+      </div>
+
+      <button
+        class="copy-room"
+        id="copyRoom"
+      >
+        Copy room code
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- GAME -->
+
+  <main class="game-area">
+
+    <header class="topbar">
+
+      <div>
+
+        <div
+          class="game-title"
+          id="gameTitle"
+        >
+          Tic-Tac-Toe
+        </div>
+
+        <div
+          class="game-subtitle"
+          id="gameSubtitle"
+        >
+          waiting for another player...
+        </div>
+
+      </div>
+
+
+      <div
+        class="players"
+        id="players"
+      ></div>
+
+    </header>
+
+
+    <section
+      class="game-content"
+      id="gameContent"
+    ></section>
+
+  </main>
+
+
+  <!-- CHAT -->
+
+  <aside class="chat">
+
+    <header class="chat-header">
+
+      <div class="chat-header-title">
+        💬 room chat
+      </div>
+
+      <div class="chat-header-sub">
+        messages disappear when you leave
+      </div>
+
+    </header>
+
+
+    <div
+      class="chat-messages"
+      id="chatMessages"
+    >
+
+      <div class="chat-empty">
+        Say hi 👋
+      </div>
+
+    </div>
+
+
+    <form
+      class="chat-input"
+      id="chatForm"
+    >
+
+      <input
+        id="chatInput"
+        maxlength="300"
+        placeholder="message..."
+        autocomplete="off"
+      >
+
+      <button>
+        ↗
+      </button>
+
+    </form>
+
+  </aside>
+
+
+</div>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+/* ==================================================
+   SETUP
+================================================== */
+
+const supabase =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false
+      }
+    }
+  );
+
+
+let channel = null;
+
+let myName = "";
+
+let myId =
+  crypto.randomUUID();
+
+let roomCode = "";
+
+let currentGame = "ttt";
+
+let amHost = false;
+
+let playerList = [];
+
+
+/*
+   All actual game state lives ONLY
+   in JavaScript memory.
+
+   It is never inserted into Supabase
+   Postgres tables.
+*/
+
+let gameState = {
+  ttt: createTttState(),
+  rps: createRpsState(),
+  c4: createC4State(),
+  duel: createDuelState()
+};
+
+
+/* ==================================================
+   HELPERS
+================================================== */
+
+function randomRoom() {
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let result = "";
+
+  for (let i = 0; i < 6; i++) {
+
+    result +=
+      chars[
+        Math.floor(
+          Math.random() * chars.length
+        )
+      ];
+
+  }
+
+  return result;
+}
+
+
+function cleanName(name) {
+
+  return name
+    .trim()
+    .replace(/[<>]/g, "")
+    .slice(0, 20);
+
+}
+
+
+function cleanRoom(room) {
+
+  return room
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "")
+    .slice(0, 12);
+
+}
+
+
+/* ==================================================
+   JOIN
+================================================== */
+
+document
+  .getElementById("createButton")
+  .onclick = async () => {
+
+    myName =
+      cleanName(
+        document
+          .getElementById("nameInput")
+          .value
+      );
+
+    if (!myName) {
+
+      alert("Enter a name first ✨");
+
+      return;
+    }
+
+    roomCode =
+      randomRoom();
+
+    await enterRoom();
+
+  };
+
+
+document
+  .getElementById("joinButton")
+  .onclick = async () => {
+
+    myName =
+      cleanName(
+        document
+          .getElementById("nameInput")
+          .value
+      );
+
+    roomCode =
+      cleanRoom(
+        document
+          .getElementById("roomInput")
+          .value
+      );
+
+
+    if (!myName) {
+
+      alert("Enter a name first ✨");
+
+      return;
+    }
+
+
+    if (!roomCode) {
+
+      alert("Enter a room code ✨");
+
+      return;
+    }
+
+
+    await enterRoom();
+
+  };
+
+
+async function enterRoom() {
+
+  document
+    .getElementById("joinScreen")
+    .style.display = "none";
+
+  document
+    .getElementById("app")
+    .style.display = "grid";
+
+
+  document
+    .getElementById("roomCode")
+    .textContent =
+    roomCode;
+
+
+  channel =
+    supabase.channel(
+      "lunara:" + roomCode,
+      {
+        config: {
+
+          broadcast: {
+            self: false,
+            ack: false
+          },
+
+          presence: {
+            key: myId
+          }
+
+        }
+      }
+    );
+
+
+  /*
+    GAME EVENTS
+  */
+
+  channel.on(
+    "broadcast",
+    { event: "game_move" },
+    ({ payload }) => {
+
+      handleGameMove(payload);
+
+    }
+  );
+
+
+  /*
+    CHAT
+  */
+
+  channel.on(
+    "broadcast",
+    { event: "chat" },
+    ({ payload }) => {
+
+      receiveChat(payload);
+
+    }
+  );
+
+
+  /*
+    STATE SYNC
+  */
+
+  channel.on(
+    "broadcast",
+    { event: "state_sync" },
+    ({ payload }) => {
+
+      /*
+        Only accept a sync from the host.
+      */
+
+      if (
+        payload.host &&
+        payload.host !== myId
+      ) {
+
+        gameState =
+          payload.state;
+
+        renderGame();
+
+      }
+
+    }
+  );
+
+
+  /*
+    PRESENCE
+  */
+
+  channel.on(
+    "presence",
+    { event: "sync" },
+    () => {
+
+      updatePlayers();
+
+    }
+  );
+
+
+  channel.on(
+    "presence",
+    { event: "join" },
+    () => {
+
+      updatePlayers();
+
+      /*
+        Existing player sends the current
+        game state to the new player.
+      */
+
+      if (amHost) {
+
+        sendStateSync();
+
+      }
+
+    }
+  );
+
+
+  channel.on(
+    "presence",
+    { event: "leave" },
+    () => {
+
+      updatePlayers();
+
+    }
+  );
+
+
+  channel.subscribe(
+    async status => {
+
+      if (status !== "SUBSCRIBED") {
+
+        return;
+
+      }
+
+
+      await channel.track({
+
+        id: myId,
+        name: myName
+
+      });
+
+
+      updatePlayers();
+
+      renderGame();
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   PRESENCE
+================================================== */
+
+function updatePlayers() {
+
+  if (!channel) {
+    return;
+  }
+
+
+  const state =
+    channel.presenceState();
+
+
+  const all = [];
+
+
+  Object.values(state)
+    .forEach(entries => {
+
+      entries.forEach(entry => {
+
+        if (entry?.id) {
+
+          all.push(entry);
+
+        }
+
+      });
+
+    });
+
+
+  playerList = all;
+
+
+  /*
+    First connected player is host.
+  */
+
+  const sorted =
+    [...all].sort(
+      (a, b) =>
+        String(a.id)
+          .localeCompare(String(b.id))
+    );
+
+
+  if (sorted.length > 0) {
+
+    amHost =
+      sorted[0].id === myId;
+
+  }
+
+
+  renderPlayers();
+
+  updateGameAvailability();
+
+
+  /*
+    If a second player arrives,
+    host synchronizes state.
+  */
+
+  if (amHost && all.length >= 2) {
+
+    sendStateSync();
+
+  }
+
+}
+
+
+function renderPlayers() {
+
+  const el =
+    document.getElementById("players");
+
+
+  el.innerHTML = "";
+
+
+  playerList
+    .slice(0, 2)
+    .forEach((player, index) => {
+
+      const pill =
+        document.createElement("div");
+
+      pill.className =
+        "player-pill online";
+
+      pill.textContent =
+        index === 0
+          ? "● " + player.name
+          : "● " + player.name;
+
+      el.appendChild(pill);
+
+    });
+
+
+  if (playerList.length === 1) {
+
+    const pill =
+      document.createElement("div");
+
+    pill.className =
+      "player-pill";
+
+    pill.textContent =
+      "waiting...";
+
+    el.appendChild(pill);
+
+  }
+
+}
+
+
+function updateGameAvailability() {
+
+  const count =
+    playerList.length;
+
+
+  if (count < 2) {
+
+    document
+      .getElementById("gameSubtitle")
+      .textContent =
+      "share the room code with someone ✨";
+
+  } else {
+
+    document
+      .getElementById("gameSubtitle")
+      .textContent =
+      "two players connected · have fun ♡";
+
+  }
+
+}
+
+
+/* ==================================================
+   STATE SYNC
+================================================== */
+
+function sendStateSync() {
+
+  if (!channel || !amHost) {
+    return;
+  }
+
+
+  channel.send({
+
+    type: "broadcast",
+
+    event: "state_sync",
+
+    payload: {
+
+      host: myId,
+
+      state: gameState
+
+    }
+
+  });
+
+}
+
+
+/* ==================================================
+   GENERIC GAME BROADCAST
+================================================== */
+
+async function sendGameMove(move) {
+
+  if (!channel) {
+    return;
+  }
+
+
+  await channel.send({
+
+    type: "broadcast",
+
+    event: "game_move",
+
+    payload: {
+
+      ...move,
+
+      sender: myId
+
+    }
+
+  });
+
+}
+
+
+/* ==================================================
+   CHAT
+================================================== */
+
+document
+  .getElementById("chatForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const input =
+        document.getElementById("chatInput");
+
+
+      const text =
+        input.value
+          .trim()
+          .slice(0, 300);
+
+
+      if (!text || !channel) {
+        return;
+      }
+
+
+      /*
+        Supabase only carries this message
+        through Realtime.
+
+        It isn't inserted into Postgres.
+      */
+
+      await channel.send({
+
+        type: "broadcast",
+
+        event: "chat",
+
+        payload: {
+
+          id:
+            crypto.randomUUID(),
+
+          sender: myId,
+
+          name: myName,
+
+          text: text
+
+        }
+
+      });
+
+
+      /*
+        Because self-send is disabled,
+        render our own message locally.
+      */
+
+      addChatMessage({
+
+        sender: myId,
+
+        name: myName,
+
+        text: text
+
+      });
+
+
+      input.value = "";
+
+    }
+  );
+
+
+function receiveChat(payload) {
+
+  addChatMessage(payload);
+
+}
+
+
+function addChatMessage(message) {
+
+  const container =
+    document.getElementById(
+      "chatMessages"
+    );
+
+
+  const empty =
+    container.querySelector(
+      ".chat-empty"
+    );
+
+
+  if (empty) {
+    empty.remove();
+  }
+
+
+  const item =
+    document.createElement("div");
+
+
+  item.className =
+    "chat-message";
+
+
+  if (message.sender === myId) {
+
+    item.classList.add("mine");
+
+  }
+
+
+  const name =
+    document.createElement("div");
+
+  name.className =
+    "chat-name";
+
+  name.textContent =
+    message.name;
+
+
+  const text =
+    document.createElement("div");
+
+  text.className =
+    "chat-text";
+
+  text.textContent =
+    message.text;
+
+
+  item.appendChild(name);
+  item.appendChild(text);
+
+
+  container.appendChild(item);
+
+
+  container.scrollTop =
+    container.scrollHeight;
+
+}
+
+
+/* ==================================================
+   GAME SELECTION
+================================================== */
+
+document
+  .querySelectorAll(".game-button")
+  .forEach(button => {
+
+    button.onclick = () => {
+
+      currentGame =
+        button.dataset.game;
+
+
+      document
+        .querySelectorAll(".game-button")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
+
+
+      button.classList.add("active");
+
+
+      renderGame();
+
+    };
+
+  });
+
+
+/* ==================================================
+   GAME RENDERER
+================================================== */
+
+function renderGame() {
+
+  const content =
+    document.getElementById(
+      "gameContent"
+    );
+
+
+  if (currentGame === "ttt") {
+
+    renderTtt(content);
+
+  }
+
+  else if (currentGame === "rps") {
+
+    renderRps(content);
+
+  }
+
+  else if (currentGame === "c4") {
+
+    renderC4(content);
+
+  }
+
+  else if (currentGame === "duel") {
+
+    renderDuel(content);
+
+  }
+
+}
+
+
+/* ==================================================
+   TIC TAC TOE
+================================================== */
+
+function createTttState() {
+
+  return {
+
+    board:
+      Array(9).fill(""),
+
+    turn: 0,
+
+    winner: null,
+
+    winningLine: null,
+
+    round: 0
+
+  };
+
+}
+
+
+function renderTtt(content) {
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+    "Tic-Tac-Toe";
+
+
+  content.innerHTML = "";
+
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "game-card";
+
+
+  const status =
+    document.createElement("div");
+
+  status.className =
+    "game-status";
+
+
+  const state =
+    gameState.ttt;
+
+
+  const firstPlayer =
+    getPlayer(0);
+
+  const secondPlayer =
+    getPlayer(1);
+
+
+  let mySymbol =
+    "";
+
+
+  if (firstPlayer?.id === myId) {
+
+    mySymbol = "X";
+
+  }
+
+  else if (secondPlayer?.id === myId) {
+
+    mySymbol = "O";
+
+  }
+
+
+  if (playerList.length < 2) {
+
+    status.textContent =
+      "Waiting for another player...";
+
+  }
+
+  else if (state.winner) {
+
+    status.textContent =
+      state.winner === "draw"
+        ? "It's a draw ✦"
+        : state.winner === mySymbol
+          ? "You win! ✨"
+          : "They win ♡";
+
+  }
+
+  else {
+
+    const turnSymbol =
+      state.turn === 0
+        ? "X"
+        : "O";
+
+
+    status.textContent =
+      turnSymbol === mySymbol
+        ? "Your turn ✨"
+        : "Their turn...";
+
+  }
+
+
+  card.appendChild(status);
+
+
+  const board =
+    document.createElement("div");
+
+  board.className =
+    "ttt-board";
+
+
+  state.board.forEach(
+    (value, index) => {
+
+      const cell =
+        document.createElement("button");
+
+      cell.className =
+        "ttt-cell";
+
+
+      if (value) {
+
+        cell.classList.add(
+          value.toLowerCase()
+        );
+
+      }
+
+
+      cell.textContent =
+        value;
+
+
+      cell.onclick =
+        () => playTtt(index);
+
+
+      board.appendChild(cell);
+
+    }
+  );
+
+
+  card.appendChild(board);
+
+
+  const reset =
+    document.createElement("button");
+
+  reset.className =
+    "reset";
+
+  reset.textContent =
+    "New round";
+
+
+  reset.style.marginTop =
+    "18px";
+
+
+  reset.onclick =
+    resetTtt;
+
+
+  card.appendChild(reset);
+
+
+  content.appendChild(card);
+
+}
+
+
+function playTtt(index) {
+
+  const state =
+    gameState.ttt;
+
+
+  if (
+    playerList.length < 2 ||
+    state.winner ||
+    state.board[index]
+  ) {
+
+    return;
+
+  }
+
+
+  const myPlayerIndex =
+    getMyPlayerIndex();
+
+
+  if (
+    myPlayerIndex === -1 ||
+    state.turn !== myPlayerIndex
+  ) {
+
+    return;
+
+  }
+
+
+  const symbol =
+    myPlayerIndex === 0
+      ? "X"
+      : "O";
+
+
+  state.board[index] =
+    symbol;
+
+
+  state.turn =
+    state.turn === 0
+      ? 1
+      : 0;
+
+
+  checkTttWinner();
+
+
+  sendGameMove({
+
+    game: "ttt",
+
+    state: gameState.ttt
+
+  });
+
+
+  renderGame();
+
+}
+
+
+function checkTttWinner() {
+
+  const state =
+    gameState.ttt;
+
+
+  const wins = [
+
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+
+    [0,4,8],
+    [2,4,6]
+
+  ];
+
+
+  for (
+    const line of wins
+  ) {
+
+    const [a,b,c] =
+      line;
+
+
+    if (
+      state.board[a] &&
+      state.board[a] === state.board[b] &&
+      state.board[a] === state.board[c]
+    ) {
+
+      state.winner =
+        state.board[a];
+
+      state.winningLine =
+        line;
+
+      return;
+
+    }
+
+  }
+
+
+  if (
+    state.board.every(Boolean)
+  ) {
+
+    state.winner =
+      "draw";
+
+  }
+
+}
+
+
+function resetTtt() {
+
+  gameState.ttt =
+    createTttState();
+
+
+  sendGameMove({
+
+    game: "ttt",
+
+    state: gameState.ttt
+
+  });
+
+
+  renderGame();
+
+}
+
+
+/* ==================================================
+   ROCK PAPER SCISSORS
+================================================== */
+
+function createRpsState() {
+
+  return {
+
+    round: 0,
+
+    choices: {},
+
+    result: null
+
+  };
+
+}
+
+
+function renderRps(content) {
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+    "Rock Paper Scissors";
+
+
+  content.innerHTML = "";
+
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "game-card";
+
+
+  const status =
+    document.createElement("div");
+
+  status.className =
+    "game-status";
+
+
+  const choices =
+    gameState.rps.choices;
+
+
+  if (playerList.length < 2) {
+
+    status.textContent =
+      "Waiting for another player...";
+
+  }
+
+  else if (
+    choices[myId]
+  ) {
+
+    status.textContent =
+      gameState.rps.result ||
+      "Waiting for their choice...";
+
+  }
+
+  else {
+
+    status.textContent =
+      "Choose your weapon ✦";
+
+  }
+
+
+  card.appendChild(status);
+
+
+  const options =
+    document.createElement("div");
+
+  options.className =
+    "rps-options";
+
+
+  const data = [
+
+    ["rock", "✊", "Rock"],
+    ["paper", "✋", "Paper"],
+    ["scissors", "✌️", "Scissors"]
+
+  ];
+
+
+  data.forEach(
+    ([value, emoji, label]) => {
+
+      const button =
+        document.createElement("button");
+
+      button.className =
+        "rps-button";
+
+      button.innerHTML =
+        `${emoji}<span class="rps-label">${label}</span>`;
+
+
+      button.onclick =
+        () => playRps(value);
+
+
+      options.appendChild(button);
+
+    }
+  );
+
+
+  card.appendChild(options);
+
+
+  const reset =
+    document.createElement("button");
+
+  reset.className =
+    "reset";
+
+  reset.textContent =
+    "New round";
+
+  reset.style.marginTop =
+    "20px";
+
+
+  reset.onclick =
+    resetRps;
+
+
+  card.appendChild(reset);
+
+
+  content.appendChild(card);
+
+}
+
+
+function playRps(choice) {
+
+  if (playerList.length < 2) {
+    return;
+  }
+
+
+  const state =
+    gameState.rps;
+
+
+  if (state.choices[myId]) {
+    return;
+  }
+
+
+  state.choices[myId] =
+    choice;
+
+
+  calculateRps();
+
+
+  sendGameMove({
+
+    game: "rps",
+
+    state: state
+
+  });
+
+
+  renderGame();
+
+}
+
+
+function calculateRps() {
+
+  const state =
+    gameState.rps;
+
+
+  const ids =
+    Object.keys(state.choices);
+
+
+  if (ids.length < 2) {
+
+    state.result =
+      null;
+
+    return;
+
+  }
+
+
+  const a =
+    state.choices[ids[0]];
+
+  const b =
+    state.choices[ids[1]];
+
+
+  if (a === b) {
+
+    state.result =
+      "Draw! Same choice ✦";
+
+  }
+
+  else if (
+
+    (a === "rock" &&
+      b === "scissors") ||
+
+    (a === "paper" &&
+      b === "rock") ||
+
+    (a === "scissors" &&
+      b === "paper")
+
+  ) {
+
+    state.result =
+      ids[0] === myId
+        ? "You win! ✨"
+        : "They win ♡";
+
+  }
+
+  else {
+
+    state.result =
+      ids[1] === myId
+        ? "You win! ✨"
+        : "They win ♡";
+
+  }
+
+}
+
+
+function resetRps() {
+
+  gameState.rps =
+    createRpsState();
+
+
+  sendGameMove({
+
+    game: "rps",
+
+    state: gameState.rps
+
+  });
+
+
+  renderGame();
+
+}
+
+
+/* ==================================================
+   CONNECT FOUR
+================================================== */
+
+function createC4State() {
+
+  return {
+
+    board:
+      Array(42).fill(0),
+
+    turn: 0,
+
+    winner: null
+
+  };
+
+}
+
+
+function renderC4(content) {
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+    "Connect Four";
+
+
+  content.innerHTML = "";
+
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "game-card";
+
+
+  const status =
+    document.createElement("div");
+
+  status.className =
+    "game-status";
+
+
+  const state =
+    gameState.c4;
+
+
+  if (playerList.length < 2) {
+
+    status.textContent =
+      "Waiting for another player...";
+
+  }
+
+  else if (state.winner) {
+
+    status.textContent =
+      state.winner === 3
+        ? "Draw! ✦"
+        : state.winner === getMyPlayerIndex() + 1
+          ? "You win! ✨"
+          : "They win ♡";
+
+  }
+
+  else {
+
+    status.textContent =
+      state.turn === getMyPlayerIndex()
+        ? "Your turn ✨"
+        : "Their turn...";
+
+  }
+
+
+  card.appendChild(status);
+
+
+  const board =
+    document.createElement("div");
+
+  board.className =
+    "c4-board";
+
+
+  state.board.forEach(
+    (value, index) => {
+
+      const cell =
+        document.createElement("div");
+
+      cell.className =
+        "c4-cell";
+
+      cell.onclick =
+        () =>
+          playC4(
+            index % 7
+          );
+
+
+      if (value) {
+
+        const piece =
+          document.createElement("div");
+
+        piece.className =
+          "c4-piece " +
+          (
+            value === 1
+              ? "c4-red"
+              : "c4-yellow"
+          );
+
+
+        cell.appendChild(piece);
+
+      }
+
+
+      board.appendChild(cell);
+
+    }
+  );
+
+
+  card.appendChild(board);
+
+
+  const reset =
+    document.createElement("button");
+
+  reset.className =
+    "reset";
+
+  reset.textContent =
+    "New round";
+
+  reset.style.marginTop =
+    "18px";
+
+  reset.onclick =
+    resetC4;
+
+
+  card.appendChild(reset);
+
+
+  content.appendChild(card);
+
+}
+
+
+function playC4(column) {
+
+  const state =
+    gameState.c4;
+
+
+  if (
+    playerList.length < 2 ||
+    state.winner
+  ) {
+
+    return;
+
+  }
+
+
+  const me =
+    getMyPlayerIndex();
+
+
+  if (
+    state.turn !== me
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+    Find the lowest empty row.
+  */
+
+  let target = -1;
+
+
+  for (
+    let row = 5;
+    row >= 0;
+    row--
+  ) {
+
+    const index =
+      row * 7 + column;
+
+
+    if (
+      state.board[index] === 0
+    ) {
+
+      target = index;
+
+      break;
+
+    }
+
+  }
+
+
+  if (target === -1) {
+    return;
+  }
+
+
+  state.board[target] =
+    me + 1;
+
+
+  checkC4Winner();
+
+
+  if (!state.winner) {
+
+    state.turn =
+      me === 0
+        ? 1
+        : 0;
+
+  }
+
+
+  sendGameMove({
+
+    game: "c4",
+
+    state: state
+
+  });
+
+
+  renderGame();
+
+}
+
+
+function checkC4Winner() {
+
+  const state =
+    gameState.c4;
+
+
+  const b =
+    state.board;
+
+
+  function check(
+    start,
+    direction
+  ) {
+
+    const player =
+      b[start];
+
+
+    if (!player) {
+      return false;
+    }
+
+
+    for (
+      let i = 1;
+      i < 4;
+      i++
+    ) {
+
+      const index =
+        start +
+        direction * i;
+
+
+      if (
+        index < 0 ||
+        index >= 42 ||
+        b[index] !== player
+      ) {
+
+        return false;
+
+      }
+
+    }
+
+
+    return true;
+
+  }
+
+
+  for (
+    let row = 0;
+    row < 6;
+    row++
+  ) {
+
+    for (
+      let col = 0;
+      col < 7;
+      col++
+    ) {
+
+      const i =
+        row * 7 + col;
+
+
+      if (
+        col <= 3 &&
+        check(i, 1)
+      ) {
+
+        state.winner =
+          b[i];
+
+        return;
+
+      }
+
+
+      if (
+        row <= 2 &&
+        check(i, 7)
+      ) {
+
+        state.winner =
+          b[i];
+
+        return;
+
+      }
+
+
+      if (
+        col <= 3 &&
+        row <= 2 &&
+        check(i, 8)
+      ) {
+
+        state.winner =
+          b[i];
+
+        return;
+
+      }
+
+
+      if (
+        col >= 3 &&
+        row <= 2 &&
+        check(i, 6)
+      ) {
+
+        state.winner =
+          b[i];
+
+        return;
+
+      }
+
+    }
+
+  }
+
+
+  if (
+    b.every(Boolean)
+  ) {
+
+    state.winner =
+      3;
+
+  }
+
+}
+
+
+function resetC4() {
+
+  gameState.c4 =
+    createC4State();
+
+
+  sendGameMove({
+
+    game: "c4",
+
+    state: gameState.c4
+
+  });
+
+
+  renderGame();
+
+}
+
+
+/* ==================================================
+   QUICK DUEL
+================================================== */
+
+function createDuelState() {
+
+  return {
+
+    round: 0,
+
+    clicks: {},
+
+    started: false,
+
+    finished: false,
+
+    startAt: null
+
+  };
+
+}
+
+
+function renderDuel(content) {
+
+  document
+    .getElementById("gameTitle")
+    .textContent =
+    "Quick Duel";
+
+
+  content.innerHTML = "";
+
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "game-card";
+
+
+  const status =
+    document.createElement("div");
+
+  status.className =
+    "game-status";
+
+
+  const state =
+    gameState.duel;
+
+
+  if (playerList.length < 2) {
+
+    status.textContent =
+      "Waiting for another player...";
+
+  }
+
+  else if (
+    !state.started
+  ) {
+
+    status.textContent =
+      "Ready? Start the duel!";
+
+  }
+
+  else if (
+    state.finished
+  ) {
+
+    const ids =
+      Object.keys(state.clicks);
+
+
+    if (ids.length === 2) {
+
+      const winner =
+        ids.sort(
+          (a,b) =>
+            state.clicks[a] -
+            state.clicks[b]
+        )[0];
+
+
+      status.textContent =
+        winner === myId
+          ? "YOU WERE FASTER ⚡"
+          : "They were faster ♡";
+
+    }
+
+    else {
+
+      status.textContent =
+        "Waiting for both clicks...";
+
+    }
+
+  }
+
+  else {
+
+    status.textContent =
+      "CLICK AS FAST AS YOU CAN!";
+
+  }
+
+
+  card.appendChild(status);
+
+
+  const box =
+    document.createElement("div");
+
+  box.className =
+    "duel-box";
+
+
+  const timer =
+    document.createElement("div");
+
+  timer.className =
+    "duel-timer";
+
+  timer.textContent =
+    state.started
+      ? "⚡"
+      : "3";
+
+
+  box.appendChild(timer);
+
+
+  const button =
+    document.createElement("button");
+
+  button.className =
+    "duel-button";
+
+  button.textContent =
+    state.started
+      ? "CLICK!"
+      : "START";
+
+
+  button.onclick =
+    () => {
+
+      if (!state.started) {
+
+        state.started = true;
+
+        state.startAt =
+          Date.now();
+
+        state.clicks = {};
+
+        sendGameMove({
+
+          game: "duel",
+
+          state: state
+
+        });
+
+        renderGame();
+
+        return;
+
+      }
+
+
+      if (
+        state.finished ||
+        state.clicks[myId]
+      ) {
+
+        return;
+
+      }
+
+
+      state.clicks[myId] =
+        Date.now();
+
+
+      if (
+        Object.keys(
+          state.clicks
+        ).length >= 2
+      ) {
+
+        state.finished = true;
+
+      }
+
+
+      sendGameMove({
+
+        game: "duel",
+
+        state: state
+
+      });
+
+
+      renderGame();
+
+    };
+
+
+  box.appendChild(button);
+
+  card.appendChild(box);
+
+
+  const reset =
+    document.createElement("button");
+
+  reset.className =
+    "reset";
+
+  reset.textContent =
+    "New round";
+
+  reset.style.marginTop =
+    "18px";
+
+
+  reset.onclick = () => {
+
+    gameState.duel =
+      createDuelState();
+
+
+    sendGameMove({
+
+      game: "duel",
+
+      state: gameState.duel
+
+    });
+
+
+    renderGame();
+
+  };
+
+
+  card.appendChild(reset);
+
+  content.appendChild(card);
+
+}
+
+
+/* ==================================================
+   RECEIVE GAME STATE
+================================================== */
+
+function handleGameMove(payload) {
+
+  if (
+    payload.sender === myId
+  ) {
+
+    return;
+
+  }
+
+
+  if (!payload.game) {
+    return;
+  }
+
+
+  if (
+    payload.game === "ttt"
+  ) {
+
+    gameState.ttt =
+      payload.state;
+
+  }
+
+
+  else if (
+    payload.game === "rps"
+  ) {
+
+    gameState.rps =
+      payload.state;
+
+  }
+
+
+  else if (
+    payload.game === "c4"
+  ) {
+
+    gameState.c4 =
+      payload.state;
+
+  }
+
+
+  else if (
+    payload.game === "duel"
+  ) {
+
+    gameState.duel =
+      payload.state;
+
+  }
+
+
+  renderGame();
+
+}
+
+
+/* ==================================================
+   PLAYER HELPERS
+================================================== */
+
+function getMyPlayerIndex() {
+
+  const sorted =
+    [...playerList].sort(
+      (a,b) =>
+        String(a.id)
+          .localeCompare(
+            String(b.id)
+          )
+    );
+
+
+  return sorted.findIndex(
+    player =>
+      player.id === myId
+  );
+
+}
+
+
+function getPlayer(index) {
+
+  const sorted =
+    [...playerList].sort(
+      (a,b) =>
+        String(a.id)
+          .localeCompare(
+            String(b.id)
+          )
+    );
+
+
+  return sorted[index];
+
+}
+
+
+/* ==================================================
+   COPY ROOM
+================================================== */
+
+document
+  .getElementById("copyRoom")
+  .onclick = async () => {
+
+    await navigator.clipboard.writeText(
+      roomCode
+    );
+
+
+    const button =
+      document.getElementById(
+        "copyRoom"
+      );
+
+
+    const old =
+      button.textContent;
+
+
+    button.textContent =
+      "Copied ✨";
+
+
+    setTimeout(
+      () =>
+        button.textContent = old,
+      1200
+    );
+
+  };
+
+
+/* ==================================================
+   CLEAN UP ON LEAVE
+================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    if (channel) {
+
+      channel.untrack();
+
+      supabase.removeChannel(
+        channel
+      );
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
